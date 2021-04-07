@@ -20,8 +20,17 @@ class PostController extends Controller
         Post::create([
             'id'=> $request->id,
             'title'=> $request->title,
-            'body'=> $request->body,
+            'body'=> $request->body
         ]);
         return back();
+    }
+
+    public function get_post($id) {
+        $post = Post::find($id);
+
+        if ($post == null)
+        return response(['message' => 'user not found'], 404);
+
+        return view('post.detail')->with(['post'=>$post]);    
     }
 }
