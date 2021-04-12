@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,17 @@ Route::get('post/create', function() {
 Route::post('post/create', [PostController::class, 'store'])->name('add-post');
 
 Route::get('post/{id}', [PostController::class, 'get_post']);
+
+
+
+
+Route::get('/player','App\Http\Controllers\PlayerController@index');
+
+Route::post('/addimage', 'App\Http\Controllers\PlayerController@store')->name('addimage');
+
+Route::get('/send','App\Http\Controllers\MailController@send');
+
+Route::get('main/{lang}', function($lang){
+    App::setlocale($lang);
+    return view('home');
+});
